@@ -8,6 +8,8 @@ import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,6 +29,16 @@ public class MainActivity extends AppCompatActivity {
     // ArrayAdapter serà l'intermediari amb la ListView
     ArrayAdapter<Record> adapter;
 
+    ArrayList<String> noms = new ArrayList<>(Arrays.asList(
+            "Juan", "María", "Luis", "Ana", "Pedro", "Elena", "Carlos", "Sofía", "Javier", "Isabel",
+            "Miguel", "Laura", "David", "Carmen", "Pablo"
+    ));
+    ArrayList<String> cognoms = new ArrayList<>(Arrays.asList(
+            "García", "Martínez", "López", "González", "Rodríguez", "Fernández", "Pérez", "Sanchez",
+            "Ramírez", "Torres", "Vargas", "Santos", "Hernández", "Jiménez", "Silva"
+    ));
+
+    Random rand = new Random();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,9 +79,7 @@ public class MainActivity extends AppCompatActivity {
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for (int i=0;i<500;i++) {
-                    records.add(new Record(100, "Anonymous"));
-                }
+                records.add(new Record(rand.nextInt(100) + 1, noms.get(rand.nextInt(noms.size()))+" "+ cognoms.get(rand.nextInt(cognoms.size()))));
                 // notificar l'adapter dels canvis al model
                 adapter.notifyDataSetChanged();
             }
